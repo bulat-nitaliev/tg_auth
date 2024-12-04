@@ -1,0 +1,65 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.6-alpine
+    container_name: db
+    networks: 
+      - net
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=test1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      
+
+  backend:
+    build: 
+      context: ./task_test
+      dockerfile: Dockerfile
+    command: gunicorn  config.wsgi:application --bind 0.0.0.0:8000
+    restart: unless-stopped
+    
+    volumes:
+      - ./task_test:/task_test
+    networks: 
+      - net
+    ports:
+      - 8000:8000
+    container_name: backend
+    environment:
+      - POSTGRES_NAME=test1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: npm run serve
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/frontend
+    networks: 
+      - net
+    ports:
+      - 8080:8080
+    container_name: frontend
+
+  bot:
+    build: ./bot
+    container_name: bot
+    networks: 
+      - net
+    restart: unless-stopped
+    volumes:
+      - ./bot:/bot
+
+  
+
+
+networks:
+  net:
+    driver: bridge

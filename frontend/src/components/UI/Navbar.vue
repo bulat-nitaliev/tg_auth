@@ -1,11 +1,11 @@
 <template>
     <div class="navbar">        
-        <div @click="$router.push('/')">XML Parser & AI Analyzer Service</div>
+        <div @click="$router.push('/')">tg_auth</div>
         <div class="navbar__btns">
             <my-button v-if="isAuth" @click="$router.push('/')" >Home</my-button>
             <my-button v-if="!isAuth" @click="$router.push('/login')" >Войти на сайт</my-button>
             <my-button v-if="isAuth" @click="userLogout" >Logout</my-button>
-            <my-button v-if="!isAuth" @click="$router.push('/registr')" >Register</my-button>
+            <!-- <my-button v-if="!isAuth" @click="$router.push('/registr')" >Register</my-button> -->
         </div>      
     </div>
 </template>
