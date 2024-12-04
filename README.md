@@ -21,3 +21,12 @@ sudo docker compose up --build
 ```
 
 
+<image src="tg_.png" alt="Описание изображения">
+
+
+<image src="tg_auth.png" alt="Описание изображения">
+
+
+<image src="swager.png" alt="Описание изображения">
+
+<image src="docker.png" alt="Описание изображения">
