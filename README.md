@@ -2,8 +2,6 @@
 
 
 
-## About <a name = "about"></a>
-
 разработать Django проект с авторизацией через Telegram-бота.
 
 
